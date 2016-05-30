@@ -1,3 +1,6 @@
+
+Build status: [![Build Status](https://travis-ci.org/Vinai/currency-info.svg?branch=master)](https://travis-ci.org/Vinai/currency-info)
+
 # Currency Info
 
 This repository offers an easy way to get the data required to display money values in a given currency.  
