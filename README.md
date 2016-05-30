@@ -46,5 +46,5 @@ If you need that, I suggest using [mathiasverraes/money](https://github.com/mone
 
 ## Where does the data come from?
 
-The map is based on [LocalePlanet](http://www.localeplanet.com/api/auto/currencymap.html).  
+The map is based on the [LocalePlanet Currency Map](http://www.localeplanet.com/api/auto/currencymap.html).  
 Thanks for their epic efforts!!
