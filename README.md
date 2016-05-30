@@ -3,7 +3,12 @@ Build status: [![Build Status](https://travis-ci.org/Vinai/currency-info.svg?bra
 
 # Currency Info
 
-This repository offers an easy way to get the data required to display money values in a given currency.  
+This repository offers an easy way to get the data required to display money values in a given currency.
+  
+Sometimes a currency package that provides all things about currency is overkill, when all you want to do is display a currency.  
+PHP can natively nicely format currency values, but it doesn't know about the default fraction digits for example.  
+This is what this package can be used for. It does not provide any functionality in regards to conversion or division or such.  
+All it does it is provides some information about a given currency.
 
 ## Installation
 
