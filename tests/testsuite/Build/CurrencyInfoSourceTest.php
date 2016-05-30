@@ -24,7 +24,7 @@ class CurrencyInfoSourceTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($testSource, $currencyInfoSource->get());
     }
 
-    public function testThrowsExceptinIfInputIsNotString()
+    public function testThrowsExceptionIfInputIsNotString()
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Input has to be a JSON encoded currency info object');

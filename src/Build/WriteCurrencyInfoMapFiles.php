@@ -2,8 +2,6 @@
 
 namespace VinaiKopp\CurrencyInfo\Build;
 
-use VinaiKopp\CurrencyInfo\Build\CurrencyInfoKeys;
-
 class WriteCurrencyInfoMapFiles
 {
     /**

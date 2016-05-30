@@ -10,6 +10,8 @@ use VinaiKopp\CurrencyInfo\CurrencyInfo;
 class CurrencyInfoToSeparateMapsTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @param string $infoType
+     * @param string[]|int[]|float[] $expected
      * @dataProvider expectedInfoTypeArrayDataProvider
      */
     public function testReturnsEachInfoTypeAsAnArray($infoType, array $expected)
@@ -19,14 +21,14 @@ class CurrencyInfoToSeparateMapsTest extends \PHPUnit_Framework_TestCase
                 CurrencyInfo::SYMBOL          => 'AB',
                 CurrencyInfo::SYMBOL_NATIVE   => 'ab',
                 CurrencyInfo::FRACTION_DIGITS => 2,
-                CurrencyInfo::ROUNDING        => 0,
+                CurrencyInfo::ROUNDING        => 0.0,
                 CurrencyInfo::CODE            => 'ABC',
             ],
             'DEF' => [
                 CurrencyInfo::SYMBOL          => 'DE',
                 CurrencyInfo::SYMBOL_NATIVE   => 'de',
                 CurrencyInfo::FRACTION_DIGITS => 3,
-                CurrencyInfo::ROUNDING        => 1,
+                CurrencyInfo::ROUNDING        => 1.0,
                 CurrencyInfo::CODE            => 'DEF',
             ],
         ];
@@ -39,7 +41,7 @@ class CurrencyInfoToSeparateMapsTest extends \PHPUnit_Framework_TestCase
             CurrencyInfo::SYMBOL          => [CurrencyInfo::SYMBOL, ['ABC' => 'AB', 'DEF' => 'DE']],
             CurrencyInfo::SYMBOL_NATIVE   => [CurrencyInfo::SYMBOL_NATIVE, ['ABC' => 'ab', 'DEF' => 'de']],
             CurrencyInfo::FRACTION_DIGITS => [CurrencyInfo::FRACTION_DIGITS, ['ABC' => 2, 'DEF' => 3]],
-            CurrencyInfo::ROUNDING        => [CurrencyInfo::ROUNDING, ['ABC' => 0, 'DEF' => 1]],
+            CurrencyInfo::ROUNDING        => [CurrencyInfo::ROUNDING, ['ABC' => 0.0, 'DEF' => 1.0]],
             CurrencyInfo::CODE            => [CurrencyInfo::CODE, ['ABC' => 'ABC', 'DEF' => 'DEF']],
         ];
     }
