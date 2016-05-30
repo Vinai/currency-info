@@ -5,12 +5,28 @@ Build status: [![Build Status](https://travis-ci.org/Vinai/currency-info.svg?bra
 
 This repository offers an easy way to get the data required to display money values in a given currency.  
 
+## Installation
+
+Install using composer:
+
+```
+$ composer require vinaikopp/currency-info "~1.0"
+```
+or add it manually:
+
+```json
+{
+    "require": {
+        "vinaikopp/currency-info": "~1.0"
+    }
+}
+```
 
 ## Usage
 
 For example, to display a money value with the default number of fraction digits, something like this could be used:
 
-```
+```php
 use VinaiKopp\CurrencyInfo\CurrencyInfo;
 
 $currency = 'EUR';
