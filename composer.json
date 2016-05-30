@@ -1,5 +1,5 @@
 {
-    "name": "vinaikopp/currencyinfo",
+    "name": "vinaikopp/currency-info",
     "description": "Provide basic information to display a currency amount",
     "require": {
         "php": "~5.6.0|~7.0.0"
