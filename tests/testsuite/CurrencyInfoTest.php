@@ -2,100 +2,136 @@
 
 namespace VinaiKopp\CurrencyInfo;
 
-use VinaiKopp\CurrencyInfo\Build\CurrencyInfoKeys;
-use VinaiKopp\CurrencyInfo\Exception\UnknownCurrencyException;
-
 /**
  * @covers \VinaiKopp\CurrencyInfo\CurrencyInfo
  */
 class CurrencyInfoTest extends \PHPUnit_Framework_TestCase
 {
-    public function testReturnsTheCompleteCurrencyInfoArray()
+    /**
+     * @var array
+     */
+    private static $staticMethodCalls;
+
+    /**
+     * @var mixed
+     */
+    private static $staticMethodCallReturnValue;
+
+    /**
+     * @var CurrencyInfo
+     */
+    private $currencyInfo;
+
+    private function assertStaticMethodWasCalled($methodName)
     {
-        $currencyInfo = CurrencyInfo::getMap();
-        $this->assertInternalType('array', $currencyInfo);
-        $this->assertNotEmpty($currencyInfo);
-        $this->assertContainsOnly('array', $currencyInfo);
+        $message = sprintf('Static method "%s" was not called', $methodName);
+        $this->assertArrayHasKey($methodName, self::$staticMethodCalls, $message);
     }
 
-    public function testReturnsAllRecordsForGivenCurrency()
+    /**
+     * @param string $methodName
+     * @param mixed[] $expectedArgs
+     */
+    private function assertStaticMethodWasCalledWithParams($methodName, ...$expectedArgs)
     {
-        $euroInfo = CurrencyInfo::getMapForCurrency('EUR');
-        array_map(function ($infoKey) use ($euroInfo) {
-            $this->assertArrayHasKey($infoKey, $euroInfo);
-        }, CurrencyInfoKeys::getStatic());
+        if (! isset(self::$staticMethodCalls[$methodName])) {
+            $this->fail(sprintf('Static method "%s" was not called', $methodName));
+        }
+        $message = 'Expected static method call arguments do not match';
+        $this->assertSame($expectedArgs, self::$staticMethodCalls[$methodName], $message);
     }
 
-    public function testThrowsExceptionIfMapForCurrencyIsNotKnown()
+    /**
+     * @param string $name
+     * @param mixed[] $arguments
+     * @return mixed
+     */
+    public static function __callStatic($name, array $arguments)
     {
-        $this->expectException(UnknownCurrencyException::class);
-        $this->expectExceptionMessage('The currency "XXX" is not known');
-        CurrencyInfo::getMapForCurrency('XXX');
+        self::$staticMethodCalls[$name] = $arguments;
+        return self::$staticMethodCallReturnValue;
     }
 
-    public function testReturnsTheSymbolMap()
+    protected function setUp()
     {
-        $map = CurrencyInfo::getSymbolMap();
-        $this->assertInternalType('array', $map);
-        $this->assertNotEmpty($map);
-        $this->assertContainsOnly('string', $map);
-        $this->assertArrayHasKey('IDR', $map);
-        $this->assertSame('IDR', $map['IDR']);
+        self::$staticMethodCalls = [];
+        self::$staticMethodCallReturnValue = [];
+        $this->currencyInfo = new CurrencyInfo();
+        $this->currencyInfo->staticCurrencyInfoClass = __CLASS__;
     }
 
-    public function testReturnsTheSymbolForGivenCurrency()
+    public function testImplementsCurrencyInfoInterface()
     {
-        $this->assertSame('€', CurrencyInfo::getSymbolForCurrency('EUR'));
-        $this->assertSame('$', CurrencyInfo::getSymbolForCurrency('USD'));
-        $this->assertSame('IDR', CurrencyInfo::getSymbolForCurrency('IDR'));
+        $this->assertInstanceOf(CurrencyInfoInterface::class, $this->currencyInfo);
     }
 
-    public function testReturnsTheNativeSymbolMap()
+    public function testGetMapIsDelegatedToTheStaticCurrencyInfo()
     {
-        $map = CurrencyInfo::getNativeSymbolMap();
-        $this->assertInternalType('array', $map);
-        $this->assertNotEmpty($map);
-        $this->assertContainsOnly('string', $map);
-        $this->assertArrayHasKey('IDR', $map);
-        $this->assertSame('Rp', $map['IDR']);
+        self::$staticMethodCallReturnValue = ['dummy' => ['foo' => 'bar']];
+        $this->assertSame(self::$staticMethodCallReturnValue, $this->currencyInfo->getMap());
+        $this->assertStaticMethodWasCalled('getMap');
     }
 
-    public function testReturnsTheNativeSymbolForGivenCurrency()
+    public function testGetMapForCurrencyIsDelegatedToTheStaticCurrencyInfo()
     {
-        $this->assertSame('€', CurrencyInfo::getNativeSymbolForCurrency('EUR'));
-        $this->assertSame('$', CurrencyInfo::getNativeSymbolForCurrency('USD'));
-        $this->assertSame('Rp', CurrencyInfo::getNativeSymbolForCurrency('IDR'));
+        self::$staticMethodCallReturnValue = ['dummy' => ['buz' => 'qux']];
+        $this->assertSame(self::$staticMethodCallReturnValue, $this->currencyInfo->getMapForCurrency('XXX'));
+        $this->assertStaticMethodWasCalledWithParams('getMapForCurrency', 'XXX');
     }
 
-    public function testReturnsTheFractionDigitsMap()
+    public function testGetSymbolMapIsDelegatedToTheStaticCurrencyInfo()
     {
-        $map = CurrencyInfo::getFractionDigitsMap();
-        $this->assertInternalType('array', $map);
-        $this->assertNotEmpty($map);
-        $this->assertContainsOnly('int', $map);
-        $this->assertArrayHasKey('IDR', $map);
-        $this->assertSame(0, $map['IDR']);
+        self::$staticMethodCallReturnValue = ['foo' => 'bar'];
+        $this->assertSame(self::$staticMethodCallReturnValue, $this->currencyInfo->getSymbolMap());
+        $this->assertStaticMethodWasCalledWithParams('getSymbolMap');
     }
 
-    public function testReturnsTheFractionDigitsForGivenCurrency()
+    public function testGetSymbolForCurrencyIsDelegatedToTheStaticCurrencyInfo()
     {
-        $this->assertSame(2, CurrencyInfo::getFractionDigitsForCurrency('EUR'));
-        $this->assertSame(0, CurrencyInfo::getFractionDigitsForCurrency('IDR'));
-        $this->assertSame(3, CurrencyInfo::getFractionDigitsForCurrency('JOD'));
+        self::$staticMethodCallReturnValue = 'BAR';
+        $this->assertSame(self::$staticMethodCallReturnValue, $this->currencyInfo->getSymbolForCurrency('YYY'));
+        $this->assertStaticMethodWasCalledWithParams('getSymbolForCurrency', 'YYY');
     }
 
-    public function testReturnsTheRoundingMap()
+    public function testGetNativeSymbolMapIsDelegatedToTheStaticCurrencyInfo()
     {
-        $map = CurrencyInfo::getRoundingMap();
-        $this->assertInternalType('array', $map);
-        $this->assertNotEmpty($map);
-        $this->assertContainsOnly('float', $map);
-        $this->assertSame(0.0, $map['IDR']);
+        self::$staticMethodCallReturnValue = ['some' => 'map'];
+        $this->assertSame(self::$staticMethodCallReturnValue, $this->currencyInfo->getNativeSymbolMap());
+        $this->assertStaticMethodWasCalled('getNativeSymbolMap');
     }
 
-    public function testReturnsTheRoundingForGivenCurrency()
+    public function testGetNativeSymbolForCurrencyIsDelegatedToTheStaticCurrencyInfo()
     {
-        $this->assertSame(0.0, CurrencyInfo::getRoundingForCurrency('EUR'));
-        $this->assertGreaterThan(0.01, CurrencyInfo::getRoundingForCurrency('CHF'));
+        self::$staticMethodCallReturnValue = 'Foo';
+        $this->assertSame(self::$staticMethodCallReturnValue, $this->currencyInfo->getNativeSymbolForCurrency('ZZZ'));
+        $this->assertStaticMethodWasCalledWithParams('getNativeSymbolForCurrency', 'ZZZ');
+    }
+
+    public function testGetFractionDigitMapIsDelegatedToTheStaticCurrencyInfo()
+    {
+        self::$staticMethodCallReturnValue = ['another' => 'map'];
+        $this->assertSame(self::$staticMethodCallReturnValue, $this->currencyInfo->getFractionDigitsMap());
+        $this->assertStaticMethodWasCalled('getFractionDigitsMap');
+    }
+
+    public function testGetFractionDigitForCurrencyIsDelegatedToTheStaticCurrencyInfo()
+    {
+        self::$staticMethodCallReturnValue = 'Qux';
+        $this->assertSame(self::$staticMethodCallReturnValue, $this->currencyInfo->getFractionDigitsForCurrency('AAA'));
+        $this->assertStaticMethodWasCalledWithParams('getFractionDigitsForCurrency', 'AAA');
+    }
+
+    public function testGetRoundingMapIsDelegatedToTheStaticCurrencyInfo()
+    {
+        self::$staticMethodCallReturnValue = ['rounding' => 'stuff'];
+        $this->assertSame(self::$staticMethodCallReturnValue, $this->currencyInfo->getRoundingMap());
+        $this->assertStaticMethodWasCalled('getRoundingMap');
+    }
+
+    public function testGetRoundingForCurrencyIsDelegatedToTheStaticCurrencyInfo()
+    {
+        self::$staticMethodCallReturnValue = '111';
+        $this->assertSame(self::$staticMethodCallReturnValue, $this->currencyInfo->getRoundingForCurrency('BBB'));
+        $this->assertStaticMethodWasCalledWithParams('getRoundingForCurrency', 'BBB');
     }
 }

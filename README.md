@@ -15,14 +15,14 @@ All it does it is provides some information about a given currency.
 Install using composer:
 
 ```
-$ composer require vinaikopp/currency-info "~1.0"
+$ composer require vinaikopp/currency-info "^2.0.0"
 ```
 or add it manually:
 
 ```json
 {
     "require": {
-        "vinaikopp/currency-info": "~1.0"
+        "vinaikopp/currency-info": "^2.0.0"
     }
 }
 ```
@@ -32,7 +32,7 @@ or add it manually:
 For example, to display a money value with the default number of fraction digits, something like this could be used:
 
 ```php
-use VinaiKopp\CurrencyInfo\CurrencyInfo;
+use VinaiKopp\CurrencyInfo\StaticAccess\CurrencyInfo;
 
 $currency = 'EUR';
 $locale = 'en_US';
@@ -43,6 +43,9 @@ $formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $decimalPlaces);
 echo $formatter->formatCurrency($value, $currency);
 
 ```
+
+If you use an Dependency Injection Container and would like an instance you can inject,
+you can use `\VinaiKopp\CurrencyInfo\CurrencyInfo` for that purpose.
 
 ## What it is not
 

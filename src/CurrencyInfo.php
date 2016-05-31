@@ -2,98 +2,94 @@
 
 namespace VinaiKopp\CurrencyInfo;
 
-use VinaiKopp\CurrencyInfo\Internal\GenericCurrencyInfoAccess;
+use VinaiKopp\CurrencyInfo\StaticAccess\CurrencyInfo as StaticCurrencyInfo;
 
-class CurrencyInfo
+class CurrencyInfo implements CurrencyInfoInterface
 {
-    const SYMBOL = 'symbol';
-    const SYMBOL_NATIVE = 'symbol_native';
-    const FRACTION_DIGITS = 'decimal_digits';
-    const ROUNDING = 'rounding';
-    const CODE = 'code';
-
+    public $staticCurrencyInfoClass = StaticCurrencyInfo::class;
+    
     /**
      * @return array[]
      */
-    public static function getMap()
+    public function getMap()
     {
-        return GenericCurrencyInfoAccess::getFullCurrencyInfo();
+        return forward_static_call([$this->staticCurrencyInfoClass, __FUNCTION__]);
     }
 
     /**
-     * @param $currencyCode
+     * @param string $currencyCode
      * @return array
      */
-    public static function getMapForCurrency($currencyCode)
+    public function getMapForCurrency($currencyCode)
     {
-        return GenericCurrencyInfoAccess::getMapForCurrency($currencyCode);
+        return forward_static_call([$this->staticCurrencyInfoClass, __FUNCTION__], $currencyCode);
     }
 
     /**
      * @return string[]
      */
-    public static function getSymbolMap()
+    public function getSymbolMap()
     {
-        return GenericCurrencyInfoAccess::getCurrencyInfoSubMap(self::SYMBOL);
+        return forward_static_call([$this->staticCurrencyInfoClass, __FUNCTION__]);
     }
 
     /**
      * @param string $currencyCode
      * @return string
      */
-    public static function getSymbolForCurrency($currencyCode)
+    public function getSymbolForCurrency($currencyCode)
     {
-        return GenericCurrencyInfoAccess::getCurrencyInfoItemForCurrency(self::SYMBOL, $currencyCode);
+        return forward_static_call([$this->staticCurrencyInfoClass, __FUNCTION__], $currencyCode);
     }
 
     /**
      * @return string[]
      */
-    public static function getNativeSymbolMap()
+    public function getNativeSymbolMap()
     {
-        return GenericCurrencyInfoAccess::getCurrencyInfoSubMap(self::SYMBOL_NATIVE);
+        return forward_static_call([$this->staticCurrencyInfoClass, __FUNCTION__]);
     }
 
     /**
      * @param string $currencyCode
      * @return string
      */
-    public static function getNativeSymbolForCurrency($currencyCode)
+    public function getNativeSymbolForCurrency($currencyCode)
     {
-        return GenericCurrencyInfoAccess::getCurrencyInfoItemForCurrency(self::SYMBOL_NATIVE, $currencyCode);
+        return forward_static_call([$this->staticCurrencyInfoClass, __FUNCTION__], $currencyCode);
     }
 
     /**
      * @return int[]
      */
-    public static function getFractionDigitsMap()
+    public function getFractionDigitsMap()
     {
-        return GenericCurrencyInfoAccess::getCurrencyInfoSubMap(self::FRACTION_DIGITS);
+        return forward_static_call([$this->staticCurrencyInfoClass, __FUNCTION__]);
     }
 
     /**
      * @param string $currencyCode
      * @return int
      */
-    public static function getFractionDigitsForCurrency($currencyCode)
+    public function getFractionDigitsForCurrency($currencyCode)
     {
-        return GenericCurrencyInfoAccess::getCurrencyInfoItemForCurrency(self::FRACTION_DIGITS, $currencyCode);
+        return forward_static_call([$this->staticCurrencyInfoClass, __FUNCTION__], $currencyCode);
     }
 
     /**
      * @return float[]
      */
-    public static function getRoundingMap()
+    public function getRoundingMap()
     {
-        return GenericCurrencyInfoAccess::getCurrencyInfoSubMap(self::ROUNDING);
+        return forward_static_call([$this->staticCurrencyInfoClass, __FUNCTION__]);
     }
 
     /**
      * @param string $currencyCode
      * @return float
      */
-    public static function getRoundingForCurrency($currencyCode)
+    public function getRoundingForCurrency($currencyCode)
     {
-        return GenericCurrencyInfoAccess::getCurrencyInfoItemForCurrency(self::ROUNDING, $currencyCode);
+        return forward_static_call([$this->staticCurrencyInfoClass, __FUNCTION__], $currencyCode);
     }
 }

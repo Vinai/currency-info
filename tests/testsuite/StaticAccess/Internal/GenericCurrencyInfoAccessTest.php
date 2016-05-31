@@ -1,13 +1,13 @@
 <?php
 
-namespace VinaiKopp\CurrencyInfo\Internal;
+namespace VinaiKopp\CurrencyInfo\StaticAccess\Internal;
 
 use VinaiKopp\CurrencyInfo\Build\CurrencyInfoKeys;
-use VinaiKopp\CurrencyInfo\CurrencyInfo;
+use VinaiKopp\CurrencyInfo\StaticAccess\CurrencyInfo;
 use VinaiKopp\CurrencyInfo\Exception\UnknownCurrencyException;
 
 /**
- * @covers \VinaiKopp\CurrencyInfo\Internal\GenericCurrencyInfoAccess
+ * @covers \VinaiKopp\CurrencyInfo\StaticAccess\Internal\GenericCurrencyInfoAccess
  */
 class GenericCurrencyInfoAccessTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace VinaiKopp\CurrencyInfo\Internal;
+namespace VinaiKopp\CurrencyInfo\StaticAccess\Internal;
 
-use VinaiKopp\CurrencyInfo\CurrencyInfoResourcesDir;
+use VinaiKopp\CurrencyInfo\StaticAccess\CurrencyInfoResourcesDir;
 use VinaiKopp\CurrencyInfo\Exception\UnknownCurrencyException;
 
 class GenericCurrencyInfoAccess

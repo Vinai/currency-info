@@ -1,6 +1,6 @@
 <?php
 
-use VinaiKopp\CurrencyInfo\CurrencyInfo;
+use VinaiKopp\CurrencyInfo\StaticAccess\CurrencyInfo;
 
 require __DIR__ . '/../vendor/autoload.php';
 

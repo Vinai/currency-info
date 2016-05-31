@@ -2,7 +2,7 @@
 
 namespace VinaiKopp\CurrencyInfo\Build;
 
-use VinaiKopp\CurrencyInfo\CurrencyInfo;
+use VinaiKopp\CurrencyInfo\StaticAccess\CurrencyInfo;
 
 class CurrencyInfoToSeparateMaps
 {
