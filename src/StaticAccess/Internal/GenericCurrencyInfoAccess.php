@@ -7,6 +7,8 @@ use VinaiKopp\CurrencyInfo\Exception\UnknownCurrencyException;
 
 class GenericCurrencyInfoAccess
 {
+    static $memoizedMapData = [];
+    
     /**
      * @param string $infoKey
      * @return string
@@ -26,7 +28,7 @@ class GenericCurrencyInfoAccess
 
     /**
      * @param $currencyCode
-     * @return array
+     * @return string[]|int[]|float[]
      */
     public static function getMapForCurrency($currencyCode)
     {
@@ -41,7 +43,8 @@ class GenericCurrencyInfoAccess
      */
     public static function getCurrencyInfoSubMap($infoKey)
     {
-        return require self::getMapFileName($infoKey);
+        $mapFileName = self::getMapFileName($infoKey);
+        return self::requireFile($mapFileName);
     }
 
     /**
@@ -57,7 +60,7 @@ class GenericCurrencyInfoAccess
     }
 
     /**
-     * @param array $map
+     * @param array[]|string[]|int[]|float[] $map
      * @param string $currencyCode
      */
     private static function validateCurrencyIsKnown(array $map, $currencyCode)
@@ -65,5 +68,17 @@ class GenericCurrencyInfoAccess
         if (!isset($map[$currencyCode])) {
             throw new UnknownCurrencyException(sprintf('The currency "%s" is not known', $currencyCode));
         }
+    }
+
+    /**
+     * @param string $mapFileName
+     * @return array[]|string[]|int[]|float[]
+     */
+    private static function requireFile($mapFileName)
+    {
+        if (! isset(self::$memoizedMapData[$mapFileName])) {
+            self::$memoizedMapData[$mapFileName] = require $mapFileName;
+        }
+        return self::$memoizedMapData[$mapFileName];
     }
 }
