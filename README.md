@@ -1,11 +1,4 @@
 
-Build status:  
-Travis: [![Build Status](https://travis-ci.org/Vinai/currency-info.svg?branch=master)](https://travis-ci.org/Vinai/currency-info)  
-Scrutinizer:
- [![Build Status](https://scrutinizer-ci.com/g/Vinai/currency-info/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Vinai/currency-info/?branch=master)
- [![Coverage](https://scrutinizer-ci.com/g/Vinai/currency-info/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Vinai/currency-info/?branch=master)
- [![Quality Score](https://scrutinizer-ci.com/g/Vinai/currency-info/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Vinai/currency-info/?branch=master)
-
 # Currency Info
 
 This repository offers an easy way to get data required to display money values in a given currency:  
@@ -16,6 +9,11 @@ This repository offers an easy way to get data required to display money values 
 * Native Symbol (e.g. $ for USD)
 
 To look up the information the (ISO 4217) three letter currency code, e.g. DKK or EUR).
+
+| Service | Build Status | Coverage | Score |
+| ------- | ------------ | -------- | ----- |
+| Travis      | [![Build Status](https://travis-ci.org/Vinai/currency-info.svg?branch=master)](https://travis-ci.org/Vinai/currency-info)                                      |  |  |
+| Scrutinizer | [![Build Status](https://scrutinizer-ci.com/g/Vinai/currency-info/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Vinai/currency-info/?branch=master) | [![Coverage](https://scrutinizer-ci.com/g/Vinai/currency-info/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Vinai/currency-info/?branch=master) | [![Quality Score](https://scrutinizer-ci.com/g/Vinai/currency-info/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Vinai/currency-info/?branch=master) |
 
 ## Background
 
