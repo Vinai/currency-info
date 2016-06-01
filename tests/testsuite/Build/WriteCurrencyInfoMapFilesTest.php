@@ -47,8 +47,8 @@ class WriteCurrencyInfoMapFilesTest extends \PHPUnit_Framework_TestCase
     {
         $infoTypeKeys = ['foo', 'bar'];
         $source = [
-            ['foo' => 'BAZ', 'bar' => 2,],
-            ['foo' => 'QUX', 'bar' => 3,],
+            ['foo' => 'BAZ', 'bar' => 2],
+            ['foo' => 'QUX', 'bar' => 3],
         ];
 
         /** @var CurrencyInfoKeys|\PHPUnit_Framework_MockObject_MockObject $stubCurrencyInfoKeys */
@@ -57,7 +57,7 @@ class WriteCurrencyInfoMapFilesTest extends \PHPUnit_Framework_TestCase
 
         $mapWriter = new WriteCurrencyInfoMapFiles(new CurrencyInfoSource($source), new \SplFileInfo($this->tmpDir));
         $mapWriter->write($stubCurrencyInfoKeys);
-        
+
         $this->assertFileExists($this->tmpDir . '/currencymap-foo.php');
         $this->assertFileExists($this->tmpDir . '/currencymap-bar.php');
         $this->assertFileExists($this->tmpDir . '/currencymap.php');

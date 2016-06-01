@@ -34,7 +34,7 @@ class CurrencyInfoTest extends \PHPUnit_Framework_TestCase
      */
     private function assertStaticMethodWasCalledWithParams($methodName, ...$expectedArgs)
     {
-        if (! isset(self::$staticMethodCalls[$methodName])) {
+        if (!isset(self::$staticMethodCalls[$methodName])) {
             $this->fail(sprintf('Static method "%s" was not called', $methodName));
         }
         $message = 'Expected static method call arguments do not match';

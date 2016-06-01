@@ -8,7 +8,7 @@ use VinaiKopp\CurrencyInfo\Exception\UnknownCurrencyException;
 class GenericCurrencyInfoAccess
 {
     private static $memoizedMapData = [];
-    
+
     /**
      * @param string $infoKey
      * @return string
@@ -36,7 +36,7 @@ class GenericCurrencyInfoAccess
         self::validateCurrencyIsKnown($currencyInfoMap, $currencyCode);
         return $currencyInfoMap[$currencyCode];
     }
-    
+
     /**
      * @param string $infoKey
      * @return string[]|int[]|float[]
@@ -76,7 +76,7 @@ class GenericCurrencyInfoAccess
      */
     private static function requireFile($mapFileName)
     {
-        if (! isset(self::$memoizedMapData[$mapFileName])) {
+        if (!isset(self::$memoizedMapData[$mapFileName])) {
             self::$memoizedMapData[$mapFileName] = require $mapFileName;
         }
         return self::$memoizedMapData[$mapFileName];
