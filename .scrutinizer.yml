@@ -2,3 +2,11 @@ filter:
     excluded_paths:
         - examples/*
         - resources/*
+build:
+    tests:
+        override:
+            -
+                command: 'phpunit --coverage-clover=clover.xml'
+                coverage:
+                    file: 'clover.xml'
+                    format: 'clover'
