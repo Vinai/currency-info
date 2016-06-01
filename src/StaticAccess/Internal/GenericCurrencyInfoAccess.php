@@ -7,7 +7,7 @@ use VinaiKopp\CurrencyInfo\Exception\UnknownCurrencyException;
 
 class GenericCurrencyInfoAccess
 {
-    static $memoizedMapData = [];
+    private static $memoizedMapData = [];
     
     /**
      * @param string $infoKey
