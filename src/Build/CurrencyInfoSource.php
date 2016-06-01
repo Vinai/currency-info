@@ -15,7 +15,6 @@ class CurrencyInfoSource
     public function __construct(array $source)
     {
         $this->source = $source;
-        
     }
 
     /**
