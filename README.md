@@ -2,7 +2,7 @@
 Build status:  
 Travis: [![Build Status](https://travis-ci.org/Vinai/currency-info.svg?branch=master)](https://travis-ci.org/Vinai/currency-info)  
 Scrutinizer:
- [![Build Status](https://scrutinizer-ci.com/g/Vinai/currency-info/build-status/master)](https://scrutinizer-ci.com/g/Vinai/currency-info/?branch=master)
+ [![Build Status](https://scrutinizer-ci.com/g/Vinai/currency-info/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Vinai/currency-info/?branch=master)
  [![Coverage](https://scrutinizer-ci.com/g/Vinai/currency-info/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Vinai/currency-info/?branch=master)
  [![Quality Score](https://scrutinizer-ci.com/g/Vinai/currency-info/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Vinai/currency-info/?branch=master)
 
